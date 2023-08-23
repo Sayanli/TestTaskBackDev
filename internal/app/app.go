@@ -1,10 +1,13 @@
 package app
 
 import (
-	"fmt"
-
 	"github.com/Sayanli/TestTaskBackDev/internal/config"
+	"github.com/Sayanli/TestTaskBackDev/internal/controller/http/handler"
+	"github.com/Sayanli/TestTaskBackDev/internal/controller/http/router"
+	"github.com/Sayanli/TestTaskBackDev/internal/repository"
+	"github.com/Sayanli/TestTaskBackDev/internal/service"
 	"github.com/Sayanli/TestTaskBackDev/pkg/database/mongodb"
+	"github.com/gofiber/fiber/v2"
 )
 
 func Run() {
@@ -12,12 +15,18 @@ func Run() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(cfg)
-
 	mongoClient, err := mongodb.NewClient(cfg.MongoDB.URL)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println("Connected to MongoDB")
-	fmt.Println(mongoClient)
+
+	app := fiber.New()
+
+	repo := repository.NewRepository(mongoClient.Database(cfg.MongoDB.Database))
+	service := service.NewService(repo, cfg.JWTSecret.Secret)
+	handler := handler.NewHandler(service)
+	server := router.NewServer(app, handler)
+
+	server.Router()
+	app.Listen(":" + cfg.HTTP.Port)
 }

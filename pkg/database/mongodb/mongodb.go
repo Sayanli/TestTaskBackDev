@@ -10,7 +10,6 @@ import (
 
 const timeout = 10 * time.Second
 
-// NewClient established connection to a mongoDb instance using provided URI and auth credentials.
 func NewClient(uri string) (*mongo.Client, error) {
 	opts := options.Client().ApplyURI(uri)
 	client, err := mongo.NewClient(opts)
