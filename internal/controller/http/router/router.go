@@ -4,6 +4,7 @@ import (
 	_ "github.com/Sayanli/TestTaskBackDev/docs"
 	"github.com/Sayanli/TestTaskBackDev/internal/controller/http/handler"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/swagger"
 )
 
@@ -20,10 +21,10 @@ func (s *Server) Router() {
 
 	s.app.Get("/swagger/*", swagger.HandlerDefault)
 
-	api := s.app.Group("/api")
+	api := s.app.Group("/api", logger.New())
 	v1 := api.Group("/v1")
 
-	user := v1.Group("/auth")
-	user.Post("/create", s.handler.CreateUser)
-	user.Post("/refresh", s.handler.RefreshToken)
+	auth := v1.Group("/auth")
+	auth.Post("/create", s.handler.CreateUser)
+	auth.Post("/refresh", s.handler.RefreshToken)
 }

@@ -3,23 +3,23 @@ package repository
 import (
 	"context"
 
-	"github.com/Sayanli/TestTaskBackDev/internal/domain"
+	"github.com/Sayanli/TestTaskBackDev/internal/entity"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-type User interface {
-	Create(ctx context.Context, user domain.User) error
-	RefreshToken(ctx context.Context, user domain.User) error
-	GetByGuid(ctx context.Context, guid string) (domain.User, error)
+type Auth interface {
+	Create(ctx context.Context, user entity.User) error
+	RefreshToken(ctx context.Context, user entity.User) error
+	GetByGuid(ctx context.Context, guid string) (entity.User, error)
 	CheckDublicateUser(ctx context.Context, guid string) (bool, error)
 }
 
 type Repository struct {
-	User
+	Auth
 }
 
 func NewRepository(db *mongo.Database) *Repository {
 	return &Repository{
-		User: NewUserMongo(db),
+		Auth: NewAuthMongo(db),
 	}
 }

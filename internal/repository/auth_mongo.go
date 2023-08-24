@@ -3,22 +3,22 @@ package repository
 import (
 	"context"
 
-	"github.com/Sayanli/TestTaskBackDev/internal/domain"
+	"github.com/Sayanli/TestTaskBackDev/internal/entity"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
-type UserRepository struct {
+type AuthRepository struct {
 	db *mongo.Collection
 }
 
-func NewUserMongo(db *mongo.Database) *UserRepository {
-	return &UserRepository{
+func NewAuthMongo(db *mongo.Database) *AuthRepository {
+	return &AuthRepository{
 		db: db.Collection("users"),
 	}
 }
 
-func (r *UserRepository) Create(ctx context.Context, user domain.User) error {
+func (r *AuthRepository) Create(ctx context.Context, user entity.User) error {
 	_, err := r.db.InsertOne(ctx, user)
 	if err != nil {
 		return err
@@ -26,7 +26,7 @@ func (r *UserRepository) Create(ctx context.Context, user domain.User) error {
 	return nil
 }
 
-func (r *UserRepository) RefreshToken(ctx context.Context, user domain.User) error {
+func (r *AuthRepository) RefreshToken(ctx context.Context, user entity.User) error {
 	_, err := r.db.UpdateOne(ctx, bson.M{"guid": user.Guid}, bson.M{"$set": bson.M{"refresh_token": user.RefreshToken}})
 	if err != nil {
 		return err
@@ -34,16 +34,16 @@ func (r *UserRepository) RefreshToken(ctx context.Context, user domain.User) err
 	return nil
 }
 
-func (r *UserRepository) GetByGuid(ctx context.Context, guid string) (domain.User, error) {
-	var user domain.User
+func (r *AuthRepository) GetByGuid(ctx context.Context, guid string) (entity.User, error) {
+	var user entity.User
 	err := r.db.FindOne(ctx, bson.M{"guid": guid}).Decode(&user)
 	if err != nil {
-		return domain.User{}, err
+		return entity.User{}, err
 	}
 	return user, nil
 }
 
-func (r *UserRepository) CheckDublicateUser(ctx context.Context, guid string) (bool, error) {
+func (r *AuthRepository) CheckDublicateUser(ctx context.Context, guid string) (bool, error) {
 	count, err := r.db.CountDocuments(ctx, bson.M{"guid": guid})
 	if err != nil {
 		return false, err

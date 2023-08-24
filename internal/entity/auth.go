@@ -1,4 +1,4 @@
-package domain
+package entity
 
 type User struct {
 	Guid         string `bson:"guid" json:"guid"`
