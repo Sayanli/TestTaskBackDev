@@ -5,3 +5,7 @@ run:
 .PHONY: compose-up
 compose-up:
 	docker-compose up -d
+
+.PHONY: swag
+swag:
+	swag init -g internal/app/app.go --parseInternal --parseDependency

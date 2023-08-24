@@ -1,0 +1,121 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is auth service",
+        "title": "Auth service API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "127.0.0.1:8080",
+    "basePath": "/",
+    "paths": {
+        "/api/v1/auth/create": {
+            "post": {
+                "description": "Create user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Create user",
+                "parameters": [
+                    {
+                        "description": "create user",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/internal_controller_http_handler.CreateUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_Sayanli_TestTaskBackDev_internal_domain.Token"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {}
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/refresh": {
+            "post": {
+                "description": "Refresh token",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Refresh token",
+                "parameters": [
+                    {
+                        "description": "refresh tokens",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_Sayanli_TestTaskBackDev_internal_domain.User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/github_com_Sayanli_TestTaskBackDev_internal_domain.Token"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {}
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "github_com_Sayanli_TestTaskBackDev_internal_domain.Token": {
+            "type": "object",
+            "properties": {
+                "accesstoken": {
+                    "type": "string"
+                },
+                "refreshtoken": {
+                    "type": "string"
+                }
+            }
+        },
+        "github_com_Sayanli_TestTaskBackDev_internal_domain.User": {
+            "type": "object",
+            "properties": {
+                "guid": {
+                    "type": "string"
+                },
+                "refreshtoken": {
+                    "type": "string"
+                }
+            }
+        },
+        "internal_controller_http_handler.CreateUser": {
+            "type": "object",
+            "properties": {
+                "guid": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

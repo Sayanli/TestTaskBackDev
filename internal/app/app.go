@@ -10,6 +10,11 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// @title Auth service API
+// @version 1.0
+// @description This is auth service
+// @host 127.0.0.1:8080
+// @BasePath /
 func Run() {
 	cfg, err := config.NewConfig()
 	if err != nil {
