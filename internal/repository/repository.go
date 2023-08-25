@@ -11,7 +11,7 @@ type Auth interface {
 	Create(ctx context.Context, user entity.User) error
 	RefreshToken(ctx context.Context, user entity.User) error
 	GetByGuid(ctx context.Context, guid string) (entity.User, error)
-	CheckDublicateUser(ctx context.Context, guid string) (bool, error)
+	IsUserExists(ctx context.Context, guid string) (bool, error)
 }
 
 type Repository struct {

@@ -1,13 +1,13 @@
 basePath: /
 definitions:
-  github_com_Sayanli_TestTaskBackDev_internal_domain.Token:
+  github_com_Sayanli_TestTaskBackDev_internal_entity.Token:
     properties:
       accesstoken:
         type: string
       refreshtoken:
         type: string
     type: object
-  github_com_Sayanli_TestTaskBackDev_internal_domain.User:
+  github_com_Sayanli_TestTaskBackDev_internal_entity.User:
     properties:
       guid:
         type: string
@@ -19,10 +19,10 @@ definitions:
       guid:
         type: string
     type: object
-host: 127.0.0.1:8080
+host: localhost:8080
 info:
   contact: {}
-  description: This is auth service
+  description: auth service
   title: Auth service API
   version: "1.0"
 paths:
@@ -44,7 +44,7 @@ paths:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_Sayanli_TestTaskBackDev_internal_domain.Token'
+            $ref: '#/definitions/github_com_Sayanli_TestTaskBackDev_internal_entity.Token'
         "500":
           description: Internal Server Error
           schema: {}
@@ -62,14 +62,14 @@ paths:
         name: input
         required: true
         schema:
-          $ref: '#/definitions/github_com_Sayanli_TestTaskBackDev_internal_domain.User'
+          $ref: '#/definitions/github_com_Sayanli_TestTaskBackDev_internal_entity.User'
       produces:
       - application/json
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/github_com_Sayanli_TestTaskBackDev_internal_domain.Token'
+            $ref: '#/definitions/github_com_Sayanli_TestTaskBackDev_internal_entity.Token'
         "500":
           description: Internal Server Error
           schema: {}

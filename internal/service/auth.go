@@ -28,7 +28,7 @@ func (s *AuthService) CreateUser(ctx context.Context, guid string) (entity.Token
 	if guid == "" {
 		return entity.Token{}, entity.ErrEmptyGuid
 	}
-	err := s.checkDublicateUser(ctx, guid)
+	err := s.isUserExists(ctx, guid)
 	if err != nil {
 		return entity.Token{}, err
 	}
@@ -81,8 +81,8 @@ func (s *AuthService) RefreshToken(ctx context.Context, guid string, refreshToke
 	return tokens, nil
 }
 
-func (s *AuthService) checkDublicateUser(ctx context.Context, guid string) error {
-	flag, err := s.repo.CheckDublicateUser(ctx, guid)
+func (s *AuthService) isUserExists(ctx context.Context, guid string) error {
+	flag, err := s.repo.IsUserExists(ctx, guid)
 	if err != nil {
 		return err
 	}

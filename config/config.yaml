@@ -2,7 +2,7 @@ http:
   port: 8080
 
 mongo_db:
-  url: mongodb://localhost:27017
+  url: mongodb://mongodb:27017
   database: auth
 
 jwt_secret:

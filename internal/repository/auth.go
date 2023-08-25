@@ -43,7 +43,7 @@ func (r *AuthRepository) GetByGuid(ctx context.Context, guid string) (entity.Use
 	return user, nil
 }
 
-func (r *AuthRepository) CheckDublicateUser(ctx context.Context, guid string) (bool, error) {
+func (r *AuthRepository) IsUserExists(ctx context.Context, guid string) (bool, error) {
 	count, err := r.db.CountDocuments(ctx, bson.M{"guid": guid})
 	if err != nil {
 		return false, err

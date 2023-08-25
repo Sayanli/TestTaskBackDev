@@ -44,7 +44,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_Sayanli_TestTaskBackDev_internal_domain.Token"
+                            "$ref": "#/definitions/github_com_Sayanli_TestTaskBackDev_internal_entity.Token"
                         }
                     },
                     "500": {
@@ -74,7 +74,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_Sayanli_TestTaskBackDev_internal_domain.User"
+                            "$ref": "#/definitions/github_com_Sayanli_TestTaskBackDev_internal_entity.User"
                         }
                     }
                 ],
@@ -82,7 +82,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_Sayanli_TestTaskBackDev_internal_domain.Token"
+                            "$ref": "#/definitions/github_com_Sayanli_TestTaskBackDev_internal_entity.Token"
                         }
                     },
                     "500": {
@@ -94,7 +94,7 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "github_com_Sayanli_TestTaskBackDev_internal_domain.Token": {
+        "github_com_Sayanli_TestTaskBackDev_internal_entity.Token": {
             "type": "object",
             "properties": {
                 "accesstoken": {
@@ -105,7 +105,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_Sayanli_TestTaskBackDev_internal_domain.User": {
+        "github_com_Sayanli_TestTaskBackDev_internal_entity.User": {
             "type": "object",
             "properties": {
                 "guid": {
@@ -130,11 +130,11 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "127.0.0.1:8080",
+	Host:             "localhost:8080",
 	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "Auth service API",
-	Description:      "This is auth service",
+	Description:      "auth service",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

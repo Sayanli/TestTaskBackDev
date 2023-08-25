@@ -15,7 +15,7 @@ import (
 // @title Auth service API
 // @version 1.0
 // @description auth service
-// @host 127.0.0.1:8080
+// @host localhost:8080
 // @BasePath /
 func Run() {
 	cfg, err := config.NewConfig()
